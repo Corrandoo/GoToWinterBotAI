@@ -22,23 +22,35 @@ def make_choice(x,y,field):
     isEnemyR = False #ЕСТЬ ЛИ ПРОТИВНИК СПРАВА
 
     for i in range(0, x - 1):
-        if field[i][y] != 0 and field[i][y]['history'] == "fire_right":
-            isAttackLeft = True
+        try:
+            if field[i][y] != 0 and field[i][y]['history'][-1] == "fire_right":
+                isAttackLeft = True
+        except:
+            pass
         if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
             isLNastyHarder = True
     for i in range(x + 1, x_size - 1):
-        if field[i][y] != 0 and field[i][y]['history'] == "fire_left":
-            isAttackRight = True
+        try:
+            if field[i][y] != 0 and field[i][y]['history'][-1] == "fire_left":
+                isAttackRight = True
+        except:
+            pass
         if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
             isRNastyHarder = True
     for i in range(0, y - 1):
-        if field[x][i] != 0 and field[x][i]['history'] == "fire_down":
-            isAttackUp = True
+        try:
+            if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_down":
+                isAttackUp = True
+        except:
+            pass
         if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
             isUNastyHarder = True
     for i in range(y + 1, y_size - 1):
-        if field[x][i] != 0 and field[x][i]['history'] == "fire_up":
-            isAttackDown = True
+        try:
+            if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_up":
+                isAttackDown = True
+        except:
+            pass
         if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
             isDNastyHarder = True
 
@@ -92,6 +104,5 @@ def make_choice(x,y,field):
         return "fire_up"
     elif isEnemyU == True and isUNastyHarder == True:
         return "go_right"
-
 
     return random.choice(["go_left", "go_down", "go_up", "go_right"])
