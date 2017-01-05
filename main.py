@@ -20,15 +20,23 @@ def make_choice(x,y,field):
     for i in range(0, x - 1):
         if field[i][y] != 0 and field[i][y]['history'] == "fire_right":
             isAttackLeft = True
+        if field[i][y] != 0 and field[i][y]['life'] > field[x][y]['life']:
+            isLNastyHarder = True
     for i in range(x + 1, x_size - 1):
         if field[i][y] != 0 and field[i][y]['history'] == "fire_left":
             isAttackRight = True
+        if field[i][y] != 0 and field[i][y]['life'] > field[x][y]['life']:
+            isRNastyHarder = True
     for i in range(0, y - 1):
         if field[x][i] != 0 and field[x][i]['history'] == "fire_down":
             isAttackUp = True
+        if field[x][i] != 0 and field[x][i]['life'] > field[x][y]['life']:
+            isUNastyHarder = True
     for i in range(y + 1, y_size - 1):
         if field[x][i] != 0 and field[x][i]['history'] == "fire_up":
             isAttackDown = True
+        if field[x][i] != 0 and field[x][i]['life'] > field[x][y]['life']:
+            isDNastyHarder = True
 
 
     for i in range(0, x - 1):
