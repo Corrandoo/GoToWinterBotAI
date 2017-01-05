@@ -20,6 +20,10 @@ def make_choice(x,y,field):
     isEnemyD = False #ЕСТЬ ЛИ ПРОТИВНИК СНИЗУ
     isEnemyL = False #ЕСТЬ ЛИ ПРОТИВНИК СЛЕВА
     isEnemyR = False #ЕСТЬ ЛИ ПРОТИВНИК СПРАВА
+    doPrefireUP = False #СТОИТ ЛИ ОТКРЫТЬ ПРЕФАЙР ВВЕРХ
+    doPrefireDOWN = False #СТОИТ ЛИ ОТКРЫТЬ ПРЕФАЙР ВНИЗ
+    doPrefireLEFT = False #СТОИТ ЛИ ОТКРЫТЬ ПРЕФАЙР ВЛЕВО
+    doPrefireRIGHT = False #СТОИТ ЛИ ОТКРЫТЬ ПРЕФАЙР ВПРАВО
 
     for i in range(0, x - 1):
         try:
@@ -29,6 +33,8 @@ def make_choice(x,y,field):
             pass
         if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
             isLNastyHarder = True
+        if field[i][y + 1] != 0 or field[i][y - 1] != 0:
+            doPrefireLEFT = True
     for i in range(x + 1, x_size - 1):
         try:
             if field[i][y] != 0 and field[i][y]['history'][-1] == "fire_left":
@@ -37,6 +43,8 @@ def make_choice(x,y,field):
             pass
         if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
             isRNastyHarder = True
+        if field[i][y + 1] != 0 or field[i][y - 1] != 0:
+            doPrefireRIGHT = True
     for i in range(0, y - 1):
         try:
             if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_down":
@@ -45,6 +53,8 @@ def make_choice(x,y,field):
             pass
         if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
             isUNastyHarder = True
+        if field[x - 1][i] != 0 or field[x + 1][i] != 0:
+            doPrefireUP = True
     for i in range(y + 1, y_size - 1):
         try:
             if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_up":
@@ -53,6 +63,8 @@ def make_choice(x,y,field):
             pass
         if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
             isDNastyHarder = True
+        if field[x + 1][i] != 0 or field[x - 1][i] != 0:
+            doPrefireDOWN = True
 
     for i in range(0, x - 1):
         if field[i][y] != 0:
@@ -80,13 +92,21 @@ def make_choice(x,y,field):
     elif isAttackDown == True and isAttackRight == True:
         return random.choice(["go_up", "go_left"])
 
-    if isEnemyD == True and (isDNastyHarder != isAttackDown):
+    if isEnemyD and (isDNastyHarder != isAttackDown):
         return "fire_down"
-    if isEnemyL == True and (isLNastyHarder != isAttackLeft):
+    if isEnemyL and (isLNastyHarder != isAttackLeft):
         return "fire_left"
-    if isEnemyR == True and (isRNastyHarder != isAttackRight):
+    if isEnemyR and (isRNastyHarder != isAttackRight):
         return "fire_right"
-    if isEnemyU == True and (isUNastyHarder != isAttackUp):
+    if isEnemyU and (isUNastyHarder != isAttackUp):
         return "fire_up"
+    if doPrefireDOWN:
+        return "fire_down"
+    elif doPrefireUP:
+        return "fire_up"
+    elif doPrefireRIGHT:
+        return "fire_right"
+    elif doPrefireLEFT:
+        return "fire_left"
 
     return random.choice(["go_left", "go_down", "go_up", "go_right"])
