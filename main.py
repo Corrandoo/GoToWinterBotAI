@@ -80,13 +80,13 @@ def make_choice(x,y,field):
     elif isAttackDown == True and isAttackRight == True:
         return random.choice(["go_up", "go_left"])
 
-    if isEnemyD == True and isDNastyHarder == False:
+    if isEnemyD == True and (isDNastyHarder != isAttackDown):
         return "fire_down"
-    if isEnemyL == True and isLNastyHarder == False:
+    if isEnemyL == True and (isLNastyHarder != isAttackLeft):
         return "fire_left"
-    if isEnemyR == True and isRNastyHarder == False:
+    if isEnemyR == True and (isRNastyHarder != isAttackRight):
         return "fire_right"
-    if isEnemyU == True and isUNastyHarder == False:
+    if isEnemyU == True and (isUNastyHarder != isAttackUp):
         return "fire_up"
 
     return random.choice(["go_left", "go_down", "go_up", "go_right"])
