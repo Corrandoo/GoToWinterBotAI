@@ -16,6 +16,10 @@ def make_choice(x,y,field):
     isDNastyHarder = False #СИЛЬНЕЕ ЛИ НИЖНИЙ ПРОТИВНИК
     isLNastyHarder = False #СИЛЬНЕЕ ЛИ ЛЕВЫЙ ПРОТИВНИК
     isRNastyHarder = False #СИЛЬНЕЕ ЛИ ПРАВЫЙ ПРОТИВНИК
+    isEnemyU = False #ЕСТЬ ЛИ ПРОТИВНИК СВЕРХУ
+    isEnemyD = False #ЕСТЬ ЛИ ПРОТИВНИК СНИЗУ
+    isEnemyL = False #ЕСТЬ ЛИ ПРОТИВНИК СЛЕВА
+    isEnemyR = False #ЕСТЬ ЛИ ПРОТИВНИК СПРАВА
 
     for i in range(0, x - 1):
         if field[i][y] != 0 and field[i][y]['history'] == "fire_right":
@@ -38,18 +42,40 @@ def make_choice(x,y,field):
         if field[x][i] != 0 and field[x][i]['life'] > field[x][y]['life']:
             isDNastyHarder = True
 
-
     for i in range(0, x - 1):
         if field[i][y] != 0:
-            return "fire_left"
+            isEnemyL = True
     for i in range(x + 1, x_size - 1):
         if field[i][y] != 0:
-            return "fire_right"
+            isEnemyR = True
     for i in range(0, y - 1):
         if field[x][i] != 0:
-            return "fire_up"
+            isEnemyU = True
     for i in range(y + 1, y_size - 1):
         if field[x][i] != 0:
-            return "fire_down"
+            isEnemyD = True
+
+    if isAttackRight == True and isAttackLeft == True:
+        return random.choice(["go_up", "go_down"])
+    elif isAttackDown == True and isAttackUp == True:
+        return random.choice(["go_left", "go_right"])
+    elif isAttackUp == True and isAttackRight == True:
+        return random.choice(["go_left", "go_down"])
+    elif isAttackUp == True and isAttackLeft == True:
+        return random.choice(["go_right", "go_down"])
+    elif isAttackDown == True and isAttackLeft == True:
+        return random.choice(["go_right", "go_down"])
+    elif isAttackDown == True and isAttackRight == True:
+        return random.choice(["go_up", "go_left"])
+
+    if isEnemyD == True:
+        return "fire_down"
+    if isEnemyL == True:
+        return "fire_left"
+    if isEnemyR == True:
+        return "fire_right"
+    if isEnemyU == True:
+        return "fire_up"
+
 
     return random.choice(["go_left", "go_down"])
