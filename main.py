@@ -70,17 +70,25 @@ def make_choice(x,y,field):
 
     if isEnemyD == True and isDNastyHarder == False:
         return "fire_down"
+    elif isEnemyD == True and isDNastyHarder == True and isAttackDown == False:
+        return "fire_down"
     elif isEnemyD == True and isDNastyHarder == True:
         return "go_left"
     if isEnemyL == True and isLNastyHarder == False:
+        return "fire_left"
+    elif isEnemyL == True and isLNastyHarder == True and isAttackLeft == False:
         return "fire_left"
     elif isEnemyL == True and isLNastyHarder == True:
         return "go_up"
     if isEnemyR == True and isRNastyHarder == False:
         return "fire_right"
+    elif isEnemyR == True and isRNastyHarder == True and isAttackRight == False:
+        return "fire_right"
     elif isEnemyR == True and isRNastyHarder == True:
         return "go_down"
     if isEnemyU == True and isUNastyHarder == False:
+        return "fire_up"
+    elif isEnemyU == True and isUNastyHarder == True and isAttackUp == False:
         return "fire_up"
     elif isEnemyU == True and isUNastyHarder == True:
         return "go_right"
