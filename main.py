@@ -100,6 +100,10 @@ def make_choice(x,y,field):
         return "fire_right"
     if isEnemyU and (isUNastyHarder != isAttackUp):
         return "fire_up"
+
+    if field[x][y]['life'] <= 5:
+        return random.choice(["go_left", "go_right", "go_up", "go_down"])
+
     if doPrefireDOWN:
         return "fire_down"
     elif doPrefireUP:
@@ -108,3 +112,5 @@ def make_choice(x,y,field):
         return "fire_right"
     elif doPrefireLEFT:
         return "fire_left"
+
+    return random.choice(["go_left", "go_right", "go_up", "go_down"])
