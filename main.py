@@ -108,19 +108,3 @@ def make_choice(x,y,field):
         return "fire_right"
     elif doPrefireLEFT:
         return "fire_left"
-    try:
-        if len(field[x][y]['history']) == 0:
-            return random.choice(["go_up", "go_down", "go_left", "go_right"])
-        elif field[x][y]['history'][-1] == "go_up":
-            return "go_down"
-        elif field[x][y]['history'][-1] == "go_down":
-            return "go_up"
-        elif field[x][y]['history'][-1] == "go_left":
-            return "go_right"
-        elif field[x][y]['history'][-1] == "go_right":
-            return "go_left"
-        else:
-            return random.choice(["go_up", "go_down", "go_left", "go_right"])
-    except:
-        pass
-    
