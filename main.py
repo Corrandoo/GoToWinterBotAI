@@ -31,40 +31,52 @@ def make_choice(x,y,field):
                 isAttackLeft = True
         except:
             pass
-        if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
-            isLNastyHarder = True
-        if field[i][y + 1] != 0 or field[i][y - 1] != 0:
-            doPrefireLEFT = True
+        try:
+            if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
+                isLNastyHarder = True
+            if field[i][y + 1] != 0 or field[i][y - 1] != 0:
+                doPrefireLEFT = True
+        except:
+            pass
     for i in range(x + 1, x_size - 1):
         try:
             if field[i][y] != 0 and field[i][y]['history'][-1] == "fire_left":
                 isAttackRight = True
         except:
             pass
-        if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
-            isRNastyHarder = True
-        if field[i][y + 1] != 0 or field[i][y - 1] != 0:
-            doPrefireRIGHT = True
+        try:
+            if field[i][y] != 0 and field[i][y]['life'] >= field[x][y]['life']:
+                isRNastyHarder = True
+            if field[i][y + 1] != 0 or field[i][y - 1] != 0:
+                doPrefireRIGHT = True
+        except:
+            pass
     for i in range(0, y - 1):
         try:
             if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_down":
                 isAttackUp = True
         except:
             pass
-        if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
-            isUNastyHarder = True
-        if field[x - 1][i] != 0 or field[x + 1][i] != 0:
-            doPrefireUP = True
+        try:
+            if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
+                isUNastyHarder = True
+            if field[x - 1][i] != 0 or field[x + 1][i] != 0:
+                doPrefireUP = True
+        except:
+            pass
     for i in range(y + 1, y_size - 1):
         try:
             if field[x][i] != 0 and field[x][i]['history'][-1] == "fire_up":
                 isAttackDown = True
         except:
             pass
-        if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
-            isDNastyHarder = True
-        if field[x + 1][i] != 0 or field[x - 1][i] != 0:
-            doPrefireDOWN = True
+        try:
+            if field[x][i] != 0 and field[x][i]['life'] >= field[x][y]['life']:
+                isDNastyHarder = True
+            if field[x + 1][i] != 0 or field[x - 1][i] != 0:
+                doPrefireDOWN = True
+        except:
+            pass
 
     for i in range(0, x - 1):
         if field[i][y] != 0:
